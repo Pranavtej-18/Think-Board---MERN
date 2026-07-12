@@ -1,17 +1,25 @@
 import Note from "../models/Note.js"
 
-// GET
-export async function getAllNotes(req,res){
-    try{
-        // const notes = await Note.find(); // oldest first
-        const notes = await Note.find().sort({createdAt:-1}); // newest first
-        res.status(200).json(notes);
-    }catch(error){
-        console.error("error in getAllNotes");
-        res.status(500).json({message:"Internal server error"});
+export async function getAllNotes(req, res) {
+    console.log("===== getAllNotes called =====");
+
+    try {
+        const notes = await Note.find().sort({ createdAt: -1 });
+
+        console.log("Notes:", notes);
+
+        return res.status(200).json(notes);
+    } catch (error) {
+        console.error("FULL ERROR:");
+        console.error(error);
+        console.error(error.stack);
+
+        return res.status(500).json({
+            message: error.message,
+            stack: error.stack
+        });
     }
-    
-};
+}
 
 // GET -> but only particular note
 export async function getNote(req,res){
