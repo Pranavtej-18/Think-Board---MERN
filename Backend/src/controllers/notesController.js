@@ -4,8 +4,8 @@ export async function getAllNotes(req, res) {
     console.log("===== getAllNotes called =====");
 
     try {
-        const notes = await Note.find().sort({ createdAt: -1 });
-
+        // const notes = await Note.find().sort({ createdAt: -1 });
+        const notes = await Note.find({user: req.user._id,}).sort({ createdAt: -1 });
         console.log("Notes:", notes);
 
         return res.status(200).json(notes);
@@ -25,6 +25,7 @@ export async function getAllNotes(req, res) {
 export async function getNote(req,res){
     try{
         const note = await Note.findById(req.params.id);
+        
         if(!note)
             return res.status(404).json({message:"No note is present to show"});
         res.status(200).json(note);
@@ -39,7 +40,7 @@ export async function getNote(req,res){
 export async function createNotes(req,res){
     try{
         const {title, content} = req.body;
-        const newNote = new Note({title, content});
+        const newNote = new Note({title, content, user:req.user._id});
 
         await newNote.save();
         res.status(201).json({message:"Note created successfully!"})
