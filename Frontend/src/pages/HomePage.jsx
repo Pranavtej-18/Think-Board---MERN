@@ -5,7 +5,9 @@ import api from "../lib/axios.js";
 import toast from "react-hot-toast"
 import NoteCard from '../components/NoteCard';
 import NotesNotFound from '../components/NotesNotFound.jsx'
+import axiosInstance from '../lib/axios.js';
 
+console.log(axiosInstance.defaults.baseURL);
 const HomePage = () => {
   const [isRateLimited, setIsRateLimited] = useState(false);
   const [notes, setNotes] = useState([]);
