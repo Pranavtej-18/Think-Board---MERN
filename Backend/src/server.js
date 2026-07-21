@@ -35,6 +35,7 @@ app.get("/test", (req, res) => {
 app.use("/api/notes/", notesRoutes);
 app.use("/api/auth/", authRoutes);
 
+
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../../Frontend/dist")))
 
