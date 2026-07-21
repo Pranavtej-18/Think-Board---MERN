@@ -18,32 +18,24 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const Port = process.env.PORT || 5001;
 
 // Middle Ware
-if (process.env.NODE_ENV != "production") {
-    app.use(cors({ origin: ["http://localhost:5173", "https://think-board-mern-livid.vercel.app/" ], Credentials: true,}))
+if (process.env.NODE_ENV == "production") {
+    app.use(
+        cors({
+             origin: [
+                "http://localhost:5173", 
+                "https://think-board-mern-livid.vercel.app" 
+            ],
+             credentials: true,
+            })
+        );
 }
-app.use(express.json()); // parses the json bodies
-// app.use(rateLimiter)
+app.use(express.json());
 
-// simple custome middle ware for process flow checking
-// app.use((req, res, next) => {
-//     console.log(`Req method is ${req.method} & Req URL is ${req.url}`);
-//     next();
-// });
 app.get("/test", (req, res) => {
     res.json({ status: "OK" });
 });
 app.use("/api/notes/", notesRoutes);
 app.use("/api/auth/", authRoutes);
-
-
-// if (process.env.NODE_ENV === "production") {
-//     app.use(express.static(path.join(__dirname, "../../Frontend/dist")))
-
-//     app.use((req, res, next) => {
-//         if (req.path.startsWith('/api')) return next();
-//         res.sendFile(path.join(__dirname, "../../Frontend/dist/index.html"))
-//     })
-// }
 
 connectDB().then(() => {
     app.listen(Port, () => {
