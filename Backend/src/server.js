@@ -36,14 +36,14 @@ app.use("/api/notes/", notesRoutes);
 app.use("/api/auth/", authRoutes);
 
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../../Frontend/dist")))
+// if (process.env.NODE_ENV === "production") {
+//     app.use(express.static(path.join(__dirname, "../../Frontend/dist")))
 
-    app.use((req, res, next) => {
-        if (req.path.startsWith('/api')) return next();
-        res.sendFile(path.join(__dirname, "../../Frontend/dist/index.html"))
-    })
-}
+//     app.use((req, res, next) => {
+//         if (req.path.startsWith('/api')) return next();
+//         res.sendFile(path.join(__dirname, "../../Frontend/dist/index.html"))
+//     })
+// }
 
 connectDB().then(() => {
     app.listen(Port, () => {
