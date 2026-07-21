@@ -19,7 +19,7 @@ const Port = process.env.PORT || 5001;
 
 // Middle Ware
 if (process.env.NODE_ENV != "production") {
-    app.use(cors({ origin: "http://localhost:5173" }))
+    app.use(cors({ origin: ["http://localhost:5173", "https://think-board-mern-livid.vercel.app/" ], Credentials: true,}))
 }
 app.use(express.json()); // parses the json bodies
 // app.use(rateLimiter)
