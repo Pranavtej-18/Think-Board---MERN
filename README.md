@@ -6,13 +6,6 @@ A full-stack Notes Management application built using the **MERN Stack** with se
 
 ---
 
-## 📸 Preview
-
-> Add screenshots or GIFs of your application here.
-
-| Home Page | Login |
-|-----------|-------|
-| ![Home](./screenshots/home.png) | ![Login](./screenshots/login.png) |
 
 ---
 
